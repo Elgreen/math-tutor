@@ -124,17 +124,24 @@ function generatePractice() {
     return;
   }
 
-  practiceProblems.value = Array.from({ length: 5 }, () => {
-    const randomMultiplier = numbers[Math.floor(Math.random() * numbers.length)];
+  const availableMultipliers = [...numbers];
+  const pickedMultipliers = [];
+
+  while (pickedMultipliers.length < 5 && availableMultipliers.length) {
+    const randomIndex = Math.floor(Math.random() * availableMultipliers.length);
+    pickedMultipliers.push(availableMultipliers.splice(randomIndex, 1)[0]);
+  }
+
+  practiceProblems.value = pickedMultipliers.map((multiplier) => {
     const swapOperands = Math.random() > 0.5;
-    const left = swapOperands ? randomMultiplier : selectedNumber.value;
-    const right = swapOperands ? selectedNumber.value : randomMultiplier;
+    const left = swapOperands ? multiplier : selectedNumber.value;
+    const right = swapOperands ? selectedNumber.value : multiplier;
 
     return {
       id: ++problemCounter,
       left,
       right,
-      correct: selectedNumber.value * randomMultiplier,
+      correct: selectedNumber.value * multiplier,
     };
   });
 
