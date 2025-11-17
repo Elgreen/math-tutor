@@ -9,7 +9,7 @@
     </header>
 
     <section class="card">
-      <h2>Step 1. Choose a number</h2>
+      <h2>Choose a number</h2>
       <p class="hint">Tap a button to pick the number X.</p>
       <div class="number-grid">
         <button
@@ -27,7 +27,7 @@
 
     <section v-if="showTable" class="card">
       <div class="card-header">
-        <h2>Step 2. Multiplication table for {{ selectedNumber }}</h2>
+        <h2>Multiplication table for {{ selectedNumber }}</h2>
         <button type="button" class="secondary" @click="startPractice">Start practice</button>
       </div>
       <table class="multiplication-table">
@@ -45,7 +45,7 @@
 
     <section v-if="showPractice" class="card">
       <div class="card-header">
-        <h2>Step 3. Practice</h2>
+        <h2>Practice</h2>
         <button type="button" class="secondary" @click="showTheoryAgain">Back to the table</button>
       </div>
       <p class="hint">
