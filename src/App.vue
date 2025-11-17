@@ -1,16 +1,16 @@
 <template>
   <main class="container">
     <header class="hero">
-      <h1>Тренажёр таблицы умножения</h1>
+      <h1>Multiplication Table Trainer</h1>
       <p>
-        Выберите число от 1 до 10, изучите таблицу умножения, а затем потренируйтесь на
-        пяти случайных примерах.
+        Pick a number from 1 to 10, study its multiplication table, and then practice with five
+        random problems.
       </p>
     </header>
 
     <section class="card">
-      <h2>Шаг 1. Выбор числа</h2>
-      <p class="hint">Нажмите на кнопку, чтобы выбрать число X.</p>
+      <h2>Step 1. Choose a number</h2>
+      <p class="hint">Tap a button to pick the number X.</p>
       <div class="number-grid">
         <button
           v-for="number in numbers"
@@ -27,8 +27,8 @@
 
     <section v-if="showTable" class="card">
       <div class="card-header">
-        <h2>Шаг 2. Таблица умножения числа {{ selectedNumber }}</h2>
-        <button type="button" class="secondary" @click="startPractice">Перейти к тренировке</button>
+        <h2>Step 2. Multiplication table for {{ selectedNumber }}</h2>
+        <button type="button" class="secondary" @click="startPractice">Start practice</button>
       </div>
       <table class="multiplication-table">
         <tbody>
@@ -45,11 +45,12 @@
 
     <section v-if="showPractice" class="card">
       <div class="card-header">
-        <h2>Шаг 3. Практика</h2>
-        <button type="button" class="secondary" @click="showTheoryAgain">Вернуться к таблице</button>
+        <h2>Step 3. Practice</h2>
+        <button type="button" class="secondary" @click="showTheoryAgain">Back to the table</button>
       </div>
       <p class="hint">
-        Заполните ответы для пяти примеров. Порядок множителей может меняться, но результат тот же!
+        Fill in the answers for five problems. The order of the factors may change, but the result
+        stays the same!
       </p>
       <form class="practice-form" @submit.prevent="checkAnswers">
         <div
@@ -63,27 +64,28 @@
             type="number"
             min="0"
             required
-            :aria-label="`Ответ для примера ${problem.left} × ${problem.right}`"
+            :aria-label="`Answer for ${problem.left} × ${problem.right}`"
           />
           <span v-if="hasResults" class="badge" :class="results[index].isCorrect ? 'badge-success' : 'badge-error'">
-            {{ results[index].isCorrect ? 'Верно' : `Нужно: ${results[index].correct}` }}
+            {{ results[index].isCorrect ? 'Correct' : `Expected: ${results[index].correct}` }}
           </span>
         </div>
 
         <div class="actions">
-          <button type="submit">Проверить ответы</button>
-          <button type="button" class="secondary" @click="generatePractice">Новые примеры</button>
-          <button type="button" class="link" @click="reset">Выбрать другое число</button>
+          <button type="submit">Check answers</button>
+          <button type="button" class="secondary" @click="generatePractice">New problems</button>
+          <button type="button" class="link" @click="reset">Choose another number</button>
         </div>
       </form>
 
       <div v-if="hasResults" class="summary" :class="allCorrect ? 'summary-success' : 'summary-info'">
-        <p v-if="allCorrect">Отлично! Все ответы верны 🎉</p>
+        <p v-if="allCorrect">Great job! All answers are correct 🎉</p>
         <template v-else>
-          <p>Есть ошибки, попробуйте ещё раз.</p>
+          <p>There are mistakes, try again.</p>
           <ul>
             <li v-for="result in incorrectResults" :key="result.id">
-              {{ result.left }} × {{ result.right }} = {{ result.correct }}, ваш ответ: {{ result.userAnswer ?? '—' }}
+              {{ result.left }} × {{ result.right }} = {{ result.correct }}, your answer:
+              {{ result.userAnswer ?? '—' }}
             </li>
           </ul>
         </template>
