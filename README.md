@@ -3,6 +3,8 @@
 A small Vue 3 app for practicing the multiplication table. Choose a number, review its table,
 and then test yourself with five random problems.
 
+Working app: https://elgreen.github.io/math-tutor/
+
 ## Getting started
 
 1. Install dependencies:
